@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>1233</title>
+
+		<script>
+		function addition() {
+			var selhoz = parseInt(document.getElementById('selhoz').value);
+			var dobicha = parseInt(document.getElementById('dobicha').value);
+      var proizvodstvo = parseInt(document.getElementById('proizvodstvo').value);
+      var sphereuslug = parseInt(document.getElementById('sphereuslug').value);
+
+			var nalogSel = parseInt(document.getElementById('nalogSel').value);
+			var nalogDobicha = parseInt(document.getElementById('nalogDobicha').value);
+      var nalogProizv = parseInt(document.getElementById('nalogProizv').value);
+      var nalogUslugi = parseInt(document.getElementById('nalogUslugi').value);
+
+			var nalogTorg = parseInt(document.getElementById('nalogTorg').value);
+
+
+			var naselenie1 = parseInt(document.getElementById('naselenie1').value);
+			var prirost = parseInt(document.getElementById('prirost').value);
+
+			var gramotnost = parseInt(document.getElementById('gramotnost').value);
+			var hightedu = parseInt(document.getElementById('hightedu').value);
+      var renta = parseInt(document.getElementById('renta').value);
+      var tehnologochnost = parseInt(document.getElementById('tehnologochnost').value);
+			var otcritosteconom = parseInt(document.getElementById('otcritosteconom').value);
+			var tsentraliz = parseInt(document.getElementById('tsentraliz').value);
+      var effectivnost = parseInt(document.getElementById('effectivnost').value);
+      var sudeyskypriros = parseInt(document.getElementById('sudeyskypriros').value);
+
+
+			if (isNaN(selhoz)==true) selhoz=0;
+			if (isNaN(dobicha)==true) dobicha=0;
+      if (isNaN(proizvodstvo)==true) proizvodstvo=0;
+      if (isNaN(sphereuslug)==true) sphereuslug=0;
+			if (isNaN(naselenie1)==true) naselenie1=0;
+			if (isNaN(prirost)==true) prirost=0;
+      if (isNaN(gramotnost)==true) gramotnost=0;
+      if (isNaN(hightedu)==true) hightedu=0;
+			if (isNaN(renta)==true) renta=0;
+			if (isNaN(tehnologochnost)==true) tehnologochnost=0;
+			if (isNaN(otcritosteconom)==true) otcritosteconom=0;
+			if (isNaN(tsentraliz)==true) tsentraliz=0;
+			if (isNaN(effectivnost)==true) effectivnost=0;
+			if (isNaN(sudeyskypriros)==true) sudeyskypriros=0;
+
+			if (isNaN(nalogSel)==true) nalogSel=0;
+			if (isNaN(nalogDobicha)==true) nalogDobicha=0;
+			if (isNaN(nalogProizv)==true) nalogProizv=0;
+			if (isNaN(nalogUslugi)==true) nalogUslugi=0;
+			if (isNaN(nalogTorg)==true) nalogTorg=0;
+
+			var eylerNumber = 2.718;
+			var basePrirost = 0.1;
+
+
+
+			var dohod = (selhoz*nalogSel*effectivnost*tsentraliz) + (dobicha*nalogDobicha*effectivnost*tsentraliz) + (proizvodstvo*nalogProizv*effectivnost*tsentraliz) + (sphereuslug*nalogUslugi*effectivnost*tsentraliz)+(selhoz + dobicha + proizvodstvo + sphereuslug)*(otcritosteconom*nalogTorg*effectivnost*tsentraliz);
+      var itogoviSelhoz = ((selhoz + gramotnost)/1000) + hightedu/100 + tehnologochnost/100 + renta/100 + otcritosteconom/100 + sudeyskypriros - nalogSel;
+			var itogoviDobicha = ((dobicha + gramotnost)/1000) + hightedu/100 + tehnologochnost/100 + renta/100 + otcritosteconom/100 + sudeyskypriros - nalogDobicha;
+			var itogoviProizv = ((proizvodstvo + gramotnost)/1000) + hightedu/100 + tehnologochnost/100 + renta/100 + otcritosteconom/100 + sudeyskypriros - nalogProizv;
+			var itogoviUslugi = ((sphereuslug + gramotnost)/1000) + hightedu/100 + tehnologochnost/100 + renta/100 + otcritosteconom/100 + sudeyskypriros - nalogUslugi;
+
+			var itogoviTorg =  ((selhoz + gramotnost)/1000) + hightedu/100 + tehnologochnost/100 + renta/100 + otcritosteconom/100 + sudeyskypriros - nalogSel;
+
+			var admRashPart0 = (tsentraliz/effectivnost)/10;
+      var admRashPart1 = eylerNumber**admRashPart0;
+			var admRashPart2 = dohod + dohod*basePrirost;
+			var admRashodi = admRashPart1*admRashPart2;
+
+			var balance = (dohod - admRashodi);
+
+			var finalSelhoz =  selhoz*(1+1*itogoviSelhoz);
+			var finalDobicha = dobicha*(1+1*itogoviDobicha);
+			var finalProizvodstvo = proizvodstvo*(1+1*itogoviProizv);
+			var finalUslugi = sphereuslug*(1+1*itogoviUslugi);
+
+			var naselenie2 = naselenie1+naselenie1*basePrirost;
+
+
+
+
+
+			document.getElementById('doh').innerHTML = "Доход: " + dohod;
+			document.getElementById('admRash').innerHTML = "Расходы: " + admRashodi;
+			document.getElementById('balans').innerHTML = "Баланс: " + balance;
+
+			document.getElementById('oldNas').innerHTML = "Население: " + naselenie1;
+			document.getElementById('newNas').innerHTML = "Новое значение населения: " + naselenie2;
+
+
+			document.getElementById('selhoz12').innerHTML = "C/Х: " + finalSelhoz;
+			document.getElementById('dobicha12').innerHTML = "Добыча: " + finalDobicha;
+			document.getElementById('proizv').innerHTML = "Производство: " + finalProizvodstvo;
+			document.getElementById('uslugi').innerHTML = "Сфера услуг: " + finalUslugi;
+			document.getElementById('torg').innerHTML = "Торговля: пока нет";
+		}
+		</script>
+
+
+	</head>
+	<body>
+
+
+    <h3>Отрасли</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Название отрасли</th>
+					<th>Оборот отрасли</th>
+					<th>Налог</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>С/Х</th>
+					<th><input id="selhoz" type="number"><br></th>
+					<th><input id="nalogSel" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Добыча</th>
+					<th><input id="dobicha" type="number"><br></th>
+						<th><input id="nalogDobicha" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Производство</th>
+					<th><input id="proizvodstvo" type="number"><br></th>
+					<th><input id="nalogProizv" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Сфера услуг</th>
+					<th><input id="sphereuslug" type="number"><br></th>
+					<th><input id="nalogUslugi" type="number"><br></th>
+				</tr>
+
+				<tr>
+					<th>Пошлина</th>
+					<th><br></th>
+					<th><input id="nalogTorg" type="number"><br></th>
+				</tr>
+
+		</table>
+
+		<br>
+
+
+		<br>
+		<br>
+
+		<table>
+			<tbody>
+				<tr>
+					<th>Население</th>
+					<th><input id="naselenie1" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Прирост</th>
+					<th><input id="prirost" type="number"><br></th>
+				</tr>
+				<tr>
+				</table>
+
+
+		<br>
+		<br>
+
+
+		<table>
+			<tbody>
+				<tr>
+					<th>Грамотность</th>
+					<th><input id="gramotnost" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Высш.обр</th>
+					<th><input id="hightedu" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Рентабельность</th>
+					<th><input id="renta" type="number"><br></th>
+				</tr>
+				<tr>
+					<th>Технологичность</th>
+					<th><input id="tehnologochnost" type="number"><br>
+				</tr>
+				<tr>
+					<th>Откр. экономики</th>
+					<th><input id="otcritosteconom" type="number"><br>
+				</tr>
+				<tr>
+					<th>Централизация</th>
+					<th><input id="tsentraliz" type="number"><br>
+				</tr>
+				<tr>
+					<th>Эффективность</th>
+					<th><input id="effectivnost" type="number"><br>
+				</tr>
+				<tr>
+					<th>Суд. прирост</th>
+					<th><input id="sudeyskypriros" type="number"><br>
+				</tr>
+		</table>
+
+		<br>
+
+<input type="button" value="Вычислить" onclick="addition();">
+
+
+
+		<br>
+		<br>
+		<form>
+			<div id="doh"></div>
+			<div id="admRash"></div>
+			<div id="balans"></div><br>
+		</form>
+
+		<form>
+			<div id="oldNas"></div>
+			<div id="newNas"></div><br>
+		</form>
+
+		<form style="">
+			<h3>Новые значения отраслей</h3>
+		<div id="selhoz12"></div>
+		<div id="dobicha12"></div>
+		<div id="proizv"></div>
+		<div id="uslugi"></div>
+		<div id="torg"></div>
+		</form>
+
+
+
+	</body>
+
+</html>
